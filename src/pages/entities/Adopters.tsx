@@ -38,7 +38,7 @@ export const Adopters = () => {
         </Grid>
         {data?.map((ado, idx) => <Grid key={idx} container marginBottom={5}>
             <Grid container >
-                <Grid xs={1} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                <Grid item xs={1} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                     <Link to={`/adopterDetails/${idx}`}>
                         <IconButton>
                             <EditIcon />

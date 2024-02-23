@@ -48,15 +48,15 @@ export const AnimalDetails = () => {
                 label="name"
                 fullWidth
                 value={storedAnimal?.[Number(id)]?.nickname}
-                onChange={(e) => setStoredAdopter(a => {
+                onChange={(e) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], nickname: e.target.value }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], nickname: e.target.value }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], nickname: e.target.value }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], nickname: e.target.value }]
                     return newStored
                 })}
             />
@@ -69,15 +69,15 @@ export const AnimalDetails = () => {
                 id="tags-standard"
                 options={['cat', 'dog']}
                 value={storedAnimal?.[Number(id)]?.kind}
-                onChange={(e, value) => setStoredAdopter(a => {
+                onChange={(e, value) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], kind: value }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], kind: value }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], kind: value }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], kind: value }]
                     return newStored
                 })}
                 renderInput={(params) => (
@@ -96,15 +96,15 @@ export const AnimalDetails = () => {
                 fullWidth
                 value={storedAnimal?.[Number(id)]?.birth}
                 type="date"
-                onChange={(e) => setStoredAdopter(a => {
+                onChange={(e) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], birth: (e.target.value) }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], birth: (e.target.value) }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], birth: (e.target.value) }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], birth: (e.target.value) }]
                     return newStored
                 })}
             />
@@ -116,15 +116,15 @@ export const AnimalDetails = () => {
                 fullWidth
                 value={storedAnimal?.[Number(id)]?.arrivalDate}
                 type="date"
-                onChange={(e) => setStoredAdopter(a => {
+                onChange={(e) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], arrivalDate: (e.target.value) }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], arrivalDate: (e.target.value) }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], arrivalDate: (e.target.value) }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], arrivalDate: (e.target.value) }]
                     return newStored
                 })}
             />
@@ -137,15 +137,15 @@ export const AnimalDetails = () => {
                 id="tags-standard"
                 options={[]}
                 value={storedAnimal?.[Number(id)]?.conditions}
-                onChange={(e, value) => setStoredAdopter(a => {
+                onChange={(e, value) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], conditions: value }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], conditions: value }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], conditions: value }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], conditions: value }]
                     return newStored
                 })}
                 renderInput={(params) => (
@@ -165,15 +165,15 @@ export const AnimalDetails = () => {
                 id="tags-standard"
                 options={['active', 'friendly', 'shy', 'unsociable']}
                 value={storedAnimal?.[Number(id)]?.personality}
-                onChange={(e, value) => setStoredAdopter(a => {
+                onChange={(e, value) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAnimal) {
                         const newStored = [...data.AnimalsData]
-                        newStored[Number(id)] = { ...newStored[Number(id)], ...a?.[Number(id)], personality: value }
+                        newStored[Number(id)] = { ...newStored[Number(id)], ...stored?.[Number(id)], personality: value }
                         return newStored
                     }
 
-                    const newStored = [...data.AnimalsData, { ...a?.[a.length - 1], personality: value }]
+                    const newStored = [...data.AnimalsData, { ...stored?.[stored.length - 1], personality: value }]
                     return newStored
                 })}
                 renderInput={(params) => (

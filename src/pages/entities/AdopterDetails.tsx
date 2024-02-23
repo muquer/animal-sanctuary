@@ -46,15 +46,15 @@ export const AdopterDetails = () => {
                 fullWidth
                 value={storedAdopter?.[Number(id)]?.name}
                 //@ts-ignore
-                onChange={(e) => setStoredAdopter(a => {
+                onChange={(e) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAdopter) {
                         const newStored = [...data.AdoptersData]
-                        newStored[Number(id)] = { ...data.AdoptersData[id], name: e.target.value }
+                        newStored[Number(id)] = {...newStored[Number(id)], ...stored?.[Number(id)],  name: e.target.value }
                         return newStored
                     }
 
-                    const newStored = [...data.AdoptersData, { name: e.target.value }]
+                    const newStored = [...data.AdoptersData, {...stored?.[stored.length - 1], name: e.target.value }]
                     return newStored
                 })}
             />
@@ -66,16 +66,15 @@ export const AdopterDetails = () => {
                 fullWidth
                 value={storedAdopter?.[Number(id)]?.age}
                 type="number"
-                //@ts-ignore
-                onChange={(e) => setStoredAdopter(a => {
+                onChange={(e) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAdopter) {
                         const newStored = [...data.AdoptersData]
-                        newStored[Number(id)] = { ...data.AdoptersData[id], age: Number(e.target.value) }
+                        newStored[Number(id)] = {...newStored[Number(id)], ...stored?.[Number(id)], age: Number(e.target.value) }
                         return newStored
                     }
 
-                    const newStored = [...data.AdoptersData, { age: Number(e.target.value) }]
+                    const newStored = [...data.AdoptersData, {...stored?.[stored.length - 1], age: Number(e.target.value) }]
                     return newStored
                 })}
             />
@@ -88,15 +87,15 @@ export const AdopterDetails = () => {
                 id="tags-standard"
                 options={['cat', 'dog']}
                 value={storedAdopter?.[Number(id)]?.favoriteAnimals}
-                onChange={(e, value) => setStoredAdopter(a => {
+                onChange={(e, value) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAdopter) {
                         const newStored = [...data.AdoptersData]
-                        newStored[Number(id)] = { ...data.AdoptersData[id], favoriteAnimals: value }
+                        newStored[Number(id)] = {...newStored[Number(id)], ...stored?.[Number(id)], favoriteAnimals: value }
                         return newStored
                     }
 
-                    const newStored = [...data.AdoptersData, { favoriteAnimals: value }]
+                    const newStored = [...data.AdoptersData, {...stored?.[stored.length - 1], favoriteAnimals: value }]
                     return newStored
                 })}
                 renderInput={(params) => (
@@ -116,15 +115,15 @@ export const AdopterDetails = () => {
                 id="tags-standard"
                 options={['active', 'friendly', 'shy', 'unsociable']}
                 value={storedAdopter?.[Number(id)]?.personality}
-                onChange={(e, value) => setStoredAdopter(a => {
+                onChange={(e, value) => setStoredAdopter(stored => {
                     const data = JSON.parse(localStorage.getItem('mock-data') || '')
                     if (id && storedAdopter) {
                         const newStored = [...data.AdoptersData]
-                        newStored[Number(id)] = { ...data.AdoptersData[id], personality: value }
+                        newStored[Number(id)] = {...newStored[Number(id)], ...stored?.[Number(id)], personality: value }
                         return newStored
                     }
 
-                    const newStored = [...data.AdoptersData, { personality: value }]
+                    const newStored = [...data.AdoptersData, {...stored?.[stored.length - 1], personality: value }]
                     return newStored
                 })}
                 renderInput={(params) => (
@@ -135,6 +134,23 @@ export const AdopterDetails = () => {
                     />
                 )}
             />
+        </Grid>
+        <Grid item xs={12} display={'flex'} justifyContent={'flex-start'}>
+            <FormControlLabel control={
+                <Checkbox id='thisi' checked={!!storedAdopter?.[Number(id)]?.childHousehold}
+                    onChange={(e, value) => setStoredAdopter(stored => {
+                        const data = JSON.parse(localStorage.getItem('mock-data') || '')
+                        if (id && storedAdopter) {
+                            const newStored = [...data.AdoptersData]
+                            newStored[Number(id)] = {...newStored[Number(id)], ...stored?.[Number(id)], childHousehold: value }
+                            return newStored
+                        }
+
+                        const newStored = [...data.AdoptersData, {...stored?.[stored.length - 1], childHousehold: value }]
+                        return newStored
+                    })}
+
+                />} label="Children household" />
         </Grid>
     </Grid>
 }
