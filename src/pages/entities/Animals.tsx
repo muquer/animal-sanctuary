@@ -37,7 +37,7 @@ export const Animals = () => {
                 </Grid>
             </Grid>
         </Grid>
-        {data?.map((ado, idx) => <Grid key={idx} container marginBottom={5}>
+        {data?.map((animal, idx) => <Grid key={idx} container marginBottom={5}>
             <Grid container>
                 <Grid item xs={1} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                     <Link to={`/animalDetails/${idx}`}>
@@ -48,39 +48,39 @@ export const Animals = () => {
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Name</Grid>
-                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{ado?.nickname}</Grid>
+                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{animal?.nickname}</Grid>
                             <Grid item xs={2}></Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Kind</Grid>
-                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{ado?.kind?.join(', ')}</Grid>
+                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{animal?.kind?.join(', ')}</Grid>
                             <Grid item xs={2}></Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Birth date</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{new Date(ado?.birth).toDateString()}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{new Date(animal?.birth).toDateString()}</Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Arrival date</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{new Date(ado?.arrivalDate).toDateString()}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{new Date(animal?.arrivalDate).toDateString()}</Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Personality</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{ado?.personality?.join(', ')}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{animal?.personality?.join(', ')}</Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Conditions</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{ado?.conditions?.join(', ')}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{animal?.conditions?.join(', ')}</Grid>
                         </Grid>
                     </Grid>
                 </Grid>

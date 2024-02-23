@@ -36,7 +36,7 @@ export const Adopters = () => {
                 </Grid>
             </Grid>
         </Grid>
-        {data?.map((ado, idx) => <Grid key={idx} container marginBottom={5}>
+        {data?.map((adopter, idx) => <Grid key={idx} container marginBottom={5}>
             <Grid container >
                 <Grid item xs={1} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                     <Link to={`/adopterDetails/${idx}`}>
@@ -47,26 +47,32 @@ export const Adopters = () => {
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Name</Grid>
-                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{ado?.name}</Grid>
+                            <Grid item xs={8} display={'flex'} justifyContent={'flex-start'}>{adopter?.name}</Grid>
                             <Grid item xs={2}></Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Age</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{ado?.age}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{adopter?.age}</Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>favorite animals</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{ado?.favoriteAnimals?.join(', ')}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{adopter?.favoriteAnimals?.join(', ')}</Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>personality</Grid>
-                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{ado?.personality?.join(', ')}</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{adopter?.personality?.join(', ')}</Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid container>
+                            <Grid item xs={2} display={'flex'} justifyContent={'flex-start'}>Children household</Grid>
+                            <Grid item xs={10} display={'flex'} justifyContent={'flex-start'}>{adopter.childHousehold ? '✓' : 'x'}</Grid>
                         </Grid>
                     </Grid>
                 </Grid>
