@@ -28,7 +28,9 @@ const generateMatches = (animal: IAnimal, adopter: IAdopter) => {
         ageMatch: ageMissMatch ? 'x' : '✓',
         childrenMatch: childrenMatch ? '✓' : 'x',
         personalityMatch: personalityMatch ? '✓' : 'x',
-        rank: 0
+        rank: 0,
+        animal,
+        adopter
     }
 
     if (sameKindMatch) {
@@ -58,7 +60,7 @@ const generateMatches = (animal: IAnimal, adopter: IAdopter) => {
 export const MatchMaking = () => {
 
     const [data, setData] = useState<ApiData>()
-    const [matches, setMatches] = useState<IMatchResult[][]>()
+    const [matches, setMatches] = useState<IMatchResult[]>()
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('mock-data') || '')
@@ -66,14 +68,13 @@ export const MatchMaking = () => {
     }, [])
 
     useEffect(() => {
-        const calculatedMatches = data?.AnimalsData.map((animal: IAnimal) => data.AdoptersData.map((adopter: IAdopter) => generateMatches(animal, adopter)))
-        
-        setMatches(calculatedMatches)
+        const calculatedMatches = data?.AnimalsData.flatMap((animal: IAnimal) => data.AdoptersData.map((adopter: IAdopter) => generateMatches(animal, adopter)))
+        setMatches(calculatedMatches?.sort((a,b)=>b.rank - a.rank))
     }, [data])
 
 
-    const removeMatch = useCallback((animalIndex: number, adopterIndex: number) => {
-        const updatedData = { ...data, AnimalsData: data?.AnimalsData.filter((v, i) => i !== animalIndex) || [], AdoptersData: data?.AdoptersData.filter((v, i) => i !== adopterIndex) || [] }
+    const removeMatch = useCallback((animal: IAnimal, adopter: IAdopter) => {
+        const updatedData = { ...data, AnimalsData: data?.AnimalsData.filter((v, i) => v.id !== animal.id) || [], AdoptersData: data?.AdoptersData.filter((v, i) => adopter.id !== v.id) || [] }
         localStorage.setItem('mock-data', JSON.stringify(updatedData))
         setData(updatedData)
     }, [data])
@@ -84,41 +85,41 @@ export const MatchMaking = () => {
         <Grid item xs={4}>Adopter</Grid>
         <hr />
         <Grid item xs={12}>
-            {data?.AnimalsData?.map((animal, animalIndex) =>
-                data?.AdoptersData?.map((adopter, adopterIndex) => {
-                    if (matches?.[animalIndex]?.[adopterIndex]?.rank && matches[animalIndex][adopterIndex].rank > 0) {
-                        return <Grid container marginBottom={5} key={animalIndex + adopterIndex}>
-                            <Grid item xs={4}>
-                                <p>nickname: {animal?.nickname}</p>
-                                <p>kind: {animal?.kind?.join(', ')}</p>
-                                <p>personality: {animal?.personality}</p>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <p>rank: {matches?.[animalIndex][adopterIndex].rank}</p>
-                                        <p>animal kind: {matches?.[animalIndex][adopterIndex].sameKindMatch}</p>
-                                        <p>Age match: {matches?.[animalIndex][adopterIndex].ageMatch}</p>
-                                        <p>children household friendly: {matches?.[animalIndex][adopterIndex].childrenMatch}</p>
-                                        <p>personality match: {matches?.[animalIndex][adopterIndex].personalityMatch}</p>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => removeMatch(animalIndex, adopterIndex)}>
-                                            Accept Match
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <p>name: {adopter.name}</p>
-                                <p>age: {adopter.age}</p>
-                                <p>personality: {adopter.personality?.join(', ')}</p>
-                                </Grid>
+            {matches?.map((match, matchIndex) => {
+                if (match?.rank && match.rank > 0) {
+                    return <Grid container marginBottom={5} key={matchIndex}>
+                        <Grid item xs={4}>
+                            <p>nickname: {match.animal?.nickname}</p>
+                            <p>kind: {match.animal?.kind?.join(', ')}</p>
+                            <p>personality: {match.animal?.personality}</p>
                         </Grid>
-                    } else {
-                        return <></>
-                    }
-                })
+                        <Grid item xs={4}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <p>rank: {match.rank}</p>
+                                    <p>animal kind: {match.sameKindMatch}</p>
+                                    <p>Age match: {match.ageMatch}</p>
+                                    <p>children household friendly: {match.childrenMatch}</p>
+                                    <p>personality match: {match.personalityMatch}</p>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button variant="contained" onClick={() => removeMatch(match.animal, match.adopter)}>
+                                        Accept Match
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <p>name: {match.adopter.name}</p>
+                            <p>age: {match.adopter.age}</p>
+                            <p>personality: {match.adopter.personality?.join(', ')}</p>
+                        </Grid>
+                    </Grid>
+                } else {
+                    return <></>
+                }
+            }
+
             )}
         </Grid>
     </Grid >

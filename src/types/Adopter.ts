@@ -4,6 +4,7 @@
 // - Personality, whether there are kids in the household…
 
 export interface IAdopter {
+    id: number;
     name: string;
     age: number
     signUpDate: string;

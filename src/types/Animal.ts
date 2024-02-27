@@ -6,6 +6,7 @@
 
 
 export interface IAnimal{
+    id: number;
     nickname: string;
     kind: string[];
     birth: string;
